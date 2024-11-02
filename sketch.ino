@@ -110,3 +110,48 @@ void sendData(int tableCapacity, int tableGuests, String tableStatus, String nee
         Serial.println("WiFi desconectado");
     }
 }
+
+void updateDisplay(int tableNumber, int tableCapacity, int tableGuests, String tableStatus, String needAssistanceStatus) {
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.print("Table Number: ");
+    display.println(tableNumber);
+
+    display.print("Capacity: ");
+    display.println(tableCapacity);
+
+    display.print("Guests: ");
+    display.println(tableGuests);
+
+    display.print("Status: ");
+    display.println(tableStatus);
+
+    display.print("Assistance: ");
+    display.println(needAssistanceStatus);
+
+    display.display();
+}
+
+void loop() {
+    // Leer los pesos de las celdas de carga
+    float weight1 = getWeight(scale1);
+    float weight2 = getWeight(scale2);
+
+    int tableGuests = 0;
+    if (weight1 >= 3) tableGuests++;
+    if (weight2 >= 3) tableGuests++;
+
+    int tableCapacity = 4;
+    String tableStatus = (tableGuests > 0) ? "Occupied" : "Free";
+
+    // Actualizar needAssistanceStatus según el estado del slide switch
+    String needAssistanceStatus = digitalRead(SLIDE_SWITCH_PIN) == LOW ? "Yes" : "No";
+
+    // Envía datos en cada iteración del loop
+    sendData(tableCapacity, tableGuests, tableStatus, needAssistanceStatus);
+
+    // Actualizar la pantalla OLED con la información actual
+    updateDisplay(1, tableCapacity, tableGuests, tableStatus, needAssistanceStatus);
+
+    delay(1000);  // Espera 1 segundo para la próxima lectura y envío
+}
