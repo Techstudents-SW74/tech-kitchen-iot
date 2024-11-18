@@ -25,7 +25,14 @@
       "left": 345.83,
       "attrs": { "i2cAddress": "0x3c" }
     },
-    { "type": "wokwi-slide-switch", "id": "sw1", "top": 42.8, "left": -179.3, "attrs": {} }
+    { "type": "wokwi-slide-switch", "id": "sw1", "top": 42.8, "left": -179.3, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": 251.1,
+      "left": 389.5,
+      "attrs": { "distance": "81" }
+    }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
@@ -43,7 +50,11 @@
     [ "esp:22", "oled1:SCL", "green", [ "h192", "v-153.6", "h-57.9" ] ],
     [ "esp:GND.2", "oled1:GND", "black", [ "h67.2", "v-124.8", "h48" ] ],
     [ "esp:GND.1", "sw1:2", "black", [ "h-38.25", "v57.6", "h-105.6", "v-57.6", "h-192.1" ] ],
-    [ "esp:13", "sw1:1", "green", [ "h-115.05" ] ]
+    [ "esp:13", "sw1:1", "green", [ "h-115.05" ] ],
+    [ "ultrasonic1:VCC", "esp:3V3", "red", [ "h-355.2", "v-307.2" ] ],
+    [ "ultrasonic1:GND", "esp:GND.3", "black", [ "v28.8", "h-183.6", "v-278.4" ] ],
+    [ "ultrasonic1:TRIG", "esp:5", "green", [ "v9.6", "h-182.8", "v-230.4" ] ],
+    [ "ultrasonic1:ECHO", "esp:18", "green", [ "v19.2", "h-183.2", "v-249.6" ] ]
   ],
   "dependencies": {}
 }
