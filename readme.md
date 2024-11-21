@@ -47,7 +47,7 @@ Este proyecto está diseñado para trabajar con un ESP32 y varios módulos conec
 - Pin 2: GND
 
 ## Dependencias
-Este proyecto puede requerir las siguientes bibliotecas:
+Este proyecto puede necesitar las siguientes bibliotecas para un correcto funcionamiento, estos son:
 - **Adafruit_GFX**: Para control gráfico de la pantalla OLED.
 - **Adafruit_SSD1306**: Para control del módulo SSD1306.
 - **HX711**: Para la comunicación con las celdas de carga HX711.
